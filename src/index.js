@@ -3,5 +3,5 @@ function say(){
 }
 
 say()
-import  '@/assets/css/index.less'
-import  '@/assets/css/main.less'
+import  '@/assets/css/one.less'
+import  '@/assets/css/two.less'
