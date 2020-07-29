@@ -1,4 +1,4 @@
-const path=require('path')
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 //将css从js中分离出来，以link的方式引用
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -8,12 +8,33 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js',
   },
-
+  resolve: {
+    extensions: ['.js', '.json', '.tsx'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   module: {
     rules: [
       {
         test: /\.less$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192, // 小于8k的图片自动转成base64格式，并且不会存在实体图片
+              outputPath: 'images/', // 图片打包后存放的目录
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(eot|ttf|woff|svg)$/,
+        use: 'file-loader',
       },
     ],
   },

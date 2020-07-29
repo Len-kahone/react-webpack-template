@@ -9,4 +9,9 @@ li {
   margin: 0;
   padding: 0;
 }
+h1 {
+  width: 100%;
+  height: 300px;
+  background-image: url(images/4baa8d47df65dcc55f22327400e730de.jpg);
+}
 
