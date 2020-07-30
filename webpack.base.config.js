@@ -1,60 +1,64 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
-  entry: path.resolve(__dirname, 'src/index.js'),
+  entry: path.resolve(__dirname, "src/index.js"),
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
   },
   resolve: {
-    extensions: ['.js', '.json', '.tsx'],
+    extensions: [".js", ".json", ".tsx"],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      "@": path.resolve(__dirname, "src"),
     },
   },
   module: {
     rules: [
+      //用eslint-loader在页面进行提醒，如果不添加只会在编辑器爆红，页面不会提示
       {
-        test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'less-loader',
-        ], //postcss给css添加前缀，兼容浏览器
-      },
-      {
-        test: /\.(jpe?g|png|gif)$/,
-        use: [
+        oneOf: [ //oneOf只取其一，不用全部都过一遍
           {
-            loader: 'url-loader',
+            test: /\.(js)$/,
+            exclude: /node_module/,
+            use:[
+              {loader: "babel-loader",options:{
+                cacheDirectory:true //启用缓存功能，让第二次构建速度更快，但输出文件必须要用contenthash名字，要不然会一直缓存，让代码上线运行缓存更好使
+              }},
+              {loader:  "eslint-loader"},
+            ]
+          },
+
+          {
+            test: /\.(jpe?g|png|gif)$/,
+            use: [
+              {
+                loader: "url-loader",
+                options: {
+                  limit: 8192, // 小于8k的图片自动转成base64格式，并且不会存在实体图片
+                  outputPath: "images/", // 图片打包后存放的目录
+                },
+              },
+            ],
+          },
+          {
+            test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/, //字体图标
+            loader: "file-loader",
             options: {
-              limit: 8192, // 小于8k的图片自动转成base64格式，并且不会存在实体图片
-              outputPath: 'images/', // 图片打包后存放的目录
+              outputPath: "font",
             },
           },
+          {
+            test: /\.(html)$/, //处理html文件中的img标签的路径问题
+            loader: "html-loader",
+          },
         ],
-      },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/, //字体图标
-        loader: 'file-loader',
-        options: {
-          outputPath: 'font',
-        },
-      },
-      {
-        test: /\.(html)$/, //处理html文件中的img标签的路径问题
-        loader: 'html-loader',
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: "./src/index.html",
     }),
-    new MiniCssExtractPlugin(), //将css从js中分离出来，以link的方式引用
   ],
- 
 };
