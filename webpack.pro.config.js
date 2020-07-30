@@ -4,9 +4,13 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
+const path=require("path");
 module.exports = merge(baseConfig, {
   mode: "production",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
+  },
   module: {
     rules: [
       {
@@ -27,4 +31,8 @@ module.exports = merge(baseConfig, {
       filename:"css/[name].[contenthash:6].css"
     }), //将css从js中分离出来，以link的方式引用
   ],
+  externals:{
+    //不打包jq，通过script标签引入
+    jquery:"jQuery"
+  }
 });
