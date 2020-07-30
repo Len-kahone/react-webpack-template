@@ -18,8 +18,12 @@ module.exports = {
     rules: [
       {
         test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader','postcss-loader', 'less-loader'],//postcss给css添加前缀，兼容浏览器
-        
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'less-loader',
+        ], //postcss给css添加前缀，兼容浏览器
       },
       {
         test: /\.(jpe?g|png|gif)$/,
@@ -36,9 +40,13 @@ module.exports = {
       {
         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/, //字体图标
         loader: 'file-loader',
-        options:{
-          outputPath:"font"
-        }
+        options: {
+          outputPath: 'font',
+        },
+      },
+      {
+        test: /\.(html)$/, //处理html文件中的img标签的路径问题
+        loader: 'html-loader',
       },
     ],
   },
@@ -48,4 +56,5 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(), //将css从js中分离出来，以link的方式引用
   ],
+ 
 };
