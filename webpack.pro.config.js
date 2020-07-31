@@ -28,11 +28,16 @@ module.exports = merge(baseConfig, {
     new CleanWebpackPlugin(), //打包前先清空文件夹
     new OptimizeCSSAssetsPlugin({}), //对css进行压缩
     new MiniCssExtractPlugin({
-      filename:"css/[name].[contenthash:6].css"
+      filename: "css/[name].[contenthash:6].css",
     }), //将css从js中分离出来，以link的方式引用
   ],
-  externals:{
+  externals: {
     //不打包jq，通过script标签引入
-    jquery:"jQuery"
-  }
+    // jquery:"jQuery"
+  },
+  // optimization: {  //代码切割，将一些第三方库从index.js中抽离出来，分成几个js
+  //   splitChunks: {
+  //     chunks: "all",
+  //   },
+  // },
 });
