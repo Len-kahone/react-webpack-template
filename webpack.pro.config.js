@@ -33,15 +33,15 @@ module.exports = merge(baseConfig, {
       filename: "css/[name].[contenthash:6].css",
     }), 
     //告诉webpack哪些库不参与打包，同时使用时名称也得变
-    new webpack.DllReferencePlugin({
-      manifest:require(path.resolve(__dirname,"dll/mainfest.json")),
-    }),
+    // new webpack.DllReferencePlugin({
+    //   manifest:require(path.resolve(__dirname,"dll/mainfest.json")),
+    // }),
     //将某个文件打包输出去，并在html中自动引入该资源
-    new addAssetHtmlWebpackPlugin([
-      {
-        filepath:path.resolve(__dirname,"dll/jquery.dll.js")
-      }
-    ])
+    // new addAssetHtmlWebpackPlugin([
+    //   {
+    //     filepath:path.resolve(__dirname,"dll/jquery.dll.js")
+    //   }
+    // ])
   ],
   externals: {
     //不打包jq，通过script标签引入
