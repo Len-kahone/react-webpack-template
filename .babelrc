@@ -1,3 +1,18 @@
 {
-    "presets": ["@babel/preset-react","@babel/preset-env"]
+  "presets": [
+    "@babel/preset-react",
+    ["@babel/preset-env", { "modules": false }],
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+      //配置按需加载antd
+    [
+      "import",
+      {
+        // 导入一个插件
+        "libraryName": "antd", // 暴露的库名
+        "style": "css" // 直接将ants样式文件动态编译成行内样式插入，就不需要每次都导入
+      }
+    ]
+  ]
 }

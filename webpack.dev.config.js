@@ -5,7 +5,7 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.(less|css)$/,
         use: [
           "style-loader", //style-loader自带热更新，所以开发模式用style-loader
           "css-loader",
@@ -17,7 +17,7 @@ module.exports = merge(baseConfig, {
   },
   plugins: [],
   devServer: {
-    port: "8888",
+    port: 7000,
     open: true,
     hot: true,
     proxy: {
@@ -30,8 +30,6 @@ module.exports = merge(baseConfig, {
       },
     },
   },
-  devtool: "inline-source-map",//代码构建后映射技术，可以追踪代码出错位置 ,推荐使用source-map或者cheap-module-source-map，一个方便调试，一个速度快
-
-
+  devtool: "'cheap-module-eval-source-map'", //代码构建后映射技术，可以追踪代码出错位置 ,推荐使用source-map或者cheap-module-source-map，一个方便调试，一个速度快
 });
 

@@ -1,11 +1,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const tsImportPluginFactory = require("ts-import-plugin");
 module.exports = {
   entry: path.resolve(__dirname, "src/index.tsx"),
 
   resolve: {
     extensions: [".js", ".json", ".tsx"],
-    alias: { //配置别名，tsconfig.json需要配置baseUrl和path
+    alias: {
+      //配置别名，tsconfig.json需要配置baseUrl和path
       "@": path.resolve(__dirname, "src"),
     },
   },
@@ -16,28 +18,11 @@ module.exports = {
         oneOf: [
           //oneOf只取其一，不用全部都过一遍
           {
-            test: /\.tsx?$/,
+            test: /\.(jsx|tsx|ts|js)$/,
             exclude: /node_modules/,
-            use: [
-              {
-                loader: "babel-loader",
-                options: {
-                  cacheDirectory: true, //启用缓存功能，让第二次构建速度更快，但输出文件必须要用contenthash名字，要不然会一直缓存，让代码上线运行缓存更好使
-                },
-              },
-              {
-                loader: "ts-loader",
-              },
-              {
-                loader: "eslint-loader",
-              },
-            ],
-          },
-          {
-            test: /\.(js)$/,
-            exclude: /node_modules/,
-            use: [
-              // {
+
+            use: [ 
+              //  {
               //   loader:  "thread-loader", //多线程构建,当项目体积大的时候开启，因为开启线程本身需要600ms，体积太小没必要开
 
               // },
@@ -47,12 +32,14 @@ module.exports = {
                   cacheDirectory: true, //启用缓存功能，让第二次构建速度更快，但输出文件必须要用contenthash名字，要不然会一直缓存，让代码上线运行缓存更好使
                 },
               },
-              { loader: "eslint-loader" },
+              {
+                loader: "eslint-loader",
+              },
             ],
           },
-
           {
             test: /\.(jpe?g|png|gif)$/,
+            exclude: /node_modules/,
             use: [
               {
                 loader: "url-loader",
@@ -66,12 +53,14 @@ module.exports = {
           {
             test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/, //字体图标
             loader: "file-loader",
+            exclude: /node_modules/,
             options: {
               outputPath: "font",
             },
           },
           {
             test: /\.(html)$/, //处理html文件中的img标签的路径问题
+            exclude: /node_modules/,
             loader: "html-loader",
           },
         ],

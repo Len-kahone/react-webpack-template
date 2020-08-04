@@ -6,6 +6,8 @@ const webpack=require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path=require("path");
 const addAssetHtmlWebpackPlugin= require("add-asset-html-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 module.exports = merge(baseConfig, {
   mode: "production",
   output: {
@@ -15,13 +17,9 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader, //从js中分离css
-          "css-loader",
-          "postcss-loader",
-          "less-loader",
-        ], //postcss给css添加前缀，兼容浏览器
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        include: /node_modules/,
       },
     ],
   },
@@ -31,7 +29,8 @@ module.exports = merge(baseConfig, {
     //将css从js中分离出来，以link的方式引用
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:6].css",
-    }), 
+    }),
+    new BundleAnalyzerPlugin(),
     //告诉webpack哪些库不参与打包，同时使用时名称也得变
     // new webpack.DllReferencePlugin({
     //   manifest:require(path.resolve(__dirname,"dll/mainfest.json")),

@@ -18,7 +18,7 @@ const Login:React.FC=function(){
     const age="kk";
     return <div>
         hello login
-        <Button type="primary">登陆</Button>
+        <Button type="primary" >登陆</Button>
     </div>;
 };
 
