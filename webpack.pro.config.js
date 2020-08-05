@@ -17,9 +17,21 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-        include: /node_modules/,
+        test: /\.(css|less)$/,
+
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "less-loader",
+          {
+            loader: "style-resources-loader",
+            options: {
+              patterns: path.resolve(__dirname, "src/style/common.less"),
+              injector: "append",
+            },
+          },
+        ],
       },
     ],
   },

@@ -1,5 +1,6 @@
 const baseConfig=require("./webpack.base.config");
 const {merge}=require("webpack-merge");
+const path=require("path");
 module.exports = merge(baseConfig, {
   mode: "development",
   module: {
@@ -9,8 +10,14 @@ module.exports = merge(baseConfig, {
         use: [
           "style-loader", //style-loader自带热更新，所以开发模式用style-loader
           "css-loader",
-          "postcss-loader",
           "less-loader",
+          {
+            loader: "style-resources-loader",
+            options: {
+              patterns: path.resolve(__dirname, "src/style/common.less"),
+              injector: "append",
+            },
+          },
         ], //postcss给css添加前缀，兼容浏览器
       },
     ],
