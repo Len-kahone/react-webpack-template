@@ -8,6 +8,8 @@ module.exports = {
     alias: {
       //配置别名，tsconfig.json需要配置baseUrl和path
       "@": path.resolve(__dirname, "src"),
+      "components": path.resolve(__dirname, "src/components"),
+      "pages": path.resolve(__dirname, "src/pages"),
     },
   },
   module: {
