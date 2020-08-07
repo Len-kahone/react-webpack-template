@@ -76,14 +76,14 @@ export const routesConfig: RouteConfigDeclaration[] = [
                 //         ),
                 // ),
                 component: React.lazy(() =>
-                    import(/* webpackChunkName: "home"*/ "pages/home/Home"),
+                    import("pages/home/Home"),
                 ),
                 routes: [
                     {
                         path: "/home/child-one",
                         isDynamic: true,
                         component: React.lazy(() =>
-                            import(/* webpackChunkName: "child-one" */ "pages/home/One"),
+                            import("pages/home/One"),
                         ),
                     },
                     {
@@ -91,7 +91,7 @@ export const routesConfig: RouteConfigDeclaration[] = [
                         isRedirect: true,
                         isDynamic: true,
                         component: React.lazy(() =>
-                            import(/* webpackChunkName: "child-two" */ "pages/home/Two"),
+                            import("pages/home/Two"),
                         ),
                     },
                 ],

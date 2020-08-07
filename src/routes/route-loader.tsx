@@ -36,7 +36,7 @@ export function renderRoutes(routesConfig: RouteConfigDeclaration[], extraProps:
     return routesConfig.map((item, index) => {
         const {
             path,
-            exact,
+            exact=true,
             isProtected,
             isDynamic,
             component: Component,
