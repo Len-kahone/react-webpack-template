@@ -24,6 +24,7 @@ module.exports = merge(baseConfig, {
   },
   plugins: [],
   devServer: {
+    historyApiFallback: true,
     port: 7000,
     open: true,
     hot: true,

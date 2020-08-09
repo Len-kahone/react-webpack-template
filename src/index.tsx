@@ -7,9 +7,7 @@ import App from "./pages/App";
 // import { renderRoutes } from "@/routes/route-loader";
   ReactDom.render(
     
-    <Router>
-      <Route exact path="/" component={App}></Route>
-    </Router>
+    <App/>
     , document.getElementById("app"));
 
 if (module.hot) {
