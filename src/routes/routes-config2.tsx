@@ -91,7 +91,7 @@ export const routesConfig: RouteConfigDeclaration[] = [
                         isRedirect: true,
                         isDynamic: true,
                         component: React.lazy(() =>
-                            import("pages/home/Two"),
+                            import("@/pages/admin/Two"),
                         ),
                     },
                 ],

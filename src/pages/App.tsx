@@ -1,33 +1,39 @@
-import React, { Component,Fragment } from "react";
-import { BrowserRouter as Router,Switch, Route ,Link} from "react-router-dom";
-import Home from "./home/Home";
-import Login from "./login/Login";
-interface AppProps {
-  routes: any;
-}
+import React, { Component, Fragment, Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+
+import routes from "@/routes/route-config";
 const App: React.FC = (props) => {
-  // const routes = [
-  //   {
-  //     path: "/home",
-  //     exact: true,
-  //     component: React.lazy(() => import("pages/home/Home")),
-  //   },
-  // ];
   return (
     <Fragment>
-    
       <Router>
-      <ul>
-        <li>
-          <Link to={{
-            pathname:"/home",
-            // search:"?name=kahone"
-          }}>跳到home页面</Link>
-        </li>
-      </ul>
-      <Route  path="/home"  component={Home}>
-        <Route path="/home/login"  component={Login}></Route>
-      </Route>
+        <Suspense fallback="loading">
+          <Switch>
+            {routes.map(item=>{
+              return <Route exact path={item.path} key={item.path} component={item.component}></Route>;
+            })}
+            {/* <Route
+              path="/"
+              exact
+              component={React.lazy(() => import("pages/home/Home"))}
+            ></Route>
+            <Route
+              path="/admin"
+              exact
+              component={React.lazy(() => import("pages/admin/Admin"))}
+            ></Route>
+            <Route
+              path="/login"
+              exact
+              component={React.lazy(() => import("pages/login/Login"))}
+            ></Route> */}
+          </Switch>
+        </Suspense>
       </Router>
     </Fragment>
   );
