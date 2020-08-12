@@ -3,20 +3,20 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect,
 } from "react-router-dom";
 
 import routes from "@/routes/route-config";
+import renderRoutes from "@/routes/renderRoutes";
 const App: React.FC = (props) => {
   return (
     <Fragment>
       <Router>
         <Suspense fallback="loading">
           <Switch>
-            {routes.map(item=>{
+          {  renderRoutes(routes)}
+            {/* {routes.map(item=>{
               return <Route exact path={item.path} key={item.path} component={item.component}></Route>;
-            })}
+            })} */}
             {/* <Route
               path="/"
               exact

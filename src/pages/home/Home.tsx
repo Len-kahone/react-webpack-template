@@ -8,7 +8,7 @@ export default class Home extends Component<any, any> {
     };
   }
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
   }
   handleClick() {
     console.log(this.props.history.push("/login"));
