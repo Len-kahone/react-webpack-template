@@ -23,8 +23,10 @@ module.exports = merge(baseConfig, {
     ],
   },
   plugins: [],
+
   devServer: {
     historyApiFallback: true,
+
     port: 7000,
     open: true,
     hot: true,
@@ -37,6 +39,12 @@ module.exports = merge(baseConfig, {
         // }
       },
     },
+  },
+  output: {
+    // 开发环境下，filename 不能使用 contenthash/chunkhash
+    filename: "js/[name].[hash:8].bundle.js",
+    chunkFilename: "js/[name].chunk.js",
+    publicPath: "/",
   },
   devtool: "'cheap-module-eval-source-map'", //代码构建后映射技术，可以追踪代码出错位置 ,推荐使用source-map或者cheap-module-source-map，一个方便调试，一个速度快
 });

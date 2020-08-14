@@ -13,6 +13,7 @@ module.exports = merge(baseConfig, {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[contenthash].js",
+    publicPath:"/"
   },
   module: {
     rules: [

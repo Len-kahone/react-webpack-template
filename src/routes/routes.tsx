@@ -4,10 +4,11 @@ export interface routeConifg {
   path: string;
   component: React.FC;
   routes?: routeConifg[];
+  exact?:boolean
 }
 
 const routes: routeConifg[] = [
-  { path: "/", component: React.lazy(() => import("pages/home/Home")) },
+  { path: "/", exact:true, component: React.lazy(() => import("pages/home/Home")) },
   {
     path: "/admin",
     component: React.lazy(() => import("pages/admin/Admin")),
@@ -15,6 +16,10 @@ const routes: routeConifg[] = [
       {
         path: "/admin/one",
         component: React.lazy(() => import("pages/admin/One")),
+      },
+      {
+        path: "/admin/two",
+        component: React.lazy(() => import("pages/admin/Two")),
       },
     ],
   },
