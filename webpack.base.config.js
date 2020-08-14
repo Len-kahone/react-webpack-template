@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackBar=require("webpackbar");
 module.exports = {
   entry: path.resolve(__dirname, "src/index.tsx"),
 
@@ -8,8 +9,8 @@ module.exports = {
     alias: {
       //配置别名，tsconfig.json需要配置baseUrl和path
       "@": path.resolve(__dirname, "src"),
-      "components": path.resolve(__dirname, "src/components"),
-      "pages": path.resolve(__dirname, "src/pages"),
+      components: path.resolve(__dirname, "src/components"),
+      pages: path.resolve(__dirname, "src/pages"),
     },
   },
   module: {
@@ -22,7 +23,7 @@ module.exports = {
             test: /\.(jsx|tsx|ts|js)$/,
             exclude: /node_modules/,
 
-            use: [ 
+            use: [
               //  {
               //   loader:  "thread-loader", //多线程构建,当项目体积大的时候开启，因为开启线程本身需要600ms，体积太小没必要开
 
@@ -71,6 +72,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+    }),
+    new WebpackBar({
+      name: process.env.NODE_ENV !== "production" ? "正在启动" : "正在打包",
+      color: "#fa8c16",
     }),
   ],
 };

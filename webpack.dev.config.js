@@ -30,6 +30,7 @@ module.exports = merge(baseConfig, {
     port: 7000,
     open: true,
     hot: true,
+    quiet:true,
     proxy: {
       "/api": {
         target: "http://localhost:9999",
