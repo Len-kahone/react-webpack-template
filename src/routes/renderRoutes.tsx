@@ -5,7 +5,6 @@ import { Route } from "react-router-dom";
 const renderRoutes=function(routes:routeConifg[]):any{
     return routes.map(route=>{
         const { path,exact=false, component:Component, routes = [] } = route;
-        console.log(path);
         return (
           <Route
             exact={exact}
