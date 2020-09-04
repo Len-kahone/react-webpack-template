@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-console.log(process.env.NODE_ENV);
 const One: React.FC = () => {
   type userInfo = {
     name: string;
@@ -8,14 +7,6 @@ const One: React.FC = () => {
     age?: number;
     readonly height: number;
   };
-  useEffect(() => {
-      setTimeout(() => {
-          console.log(333);
-      }, 1000);
-      return () => {
-        //   cleanup;
-      };
-  }, [0]);
   const [info, setInfo] = useState<userInfo[]>([
     { "name": "kahone", "gender": "男", "height": 175, "age": 18 }
   ]);

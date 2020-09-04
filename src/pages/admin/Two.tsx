@@ -1,8 +1,8 @@
 import React,{useContext} from "react";
-import {ColorContext} from "./Admin";
+import {ColorContext} from "@/store/Color";
 
 const Two = () => {
-    const color=useContext(ColorContext);
+    const {color}=useContext(ColorContext);
     return (
         <div>
             Two

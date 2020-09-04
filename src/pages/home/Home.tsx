@@ -1,5 +1,6 @@
 import React, { Component, Suspense } from "react";
-import { BrowserRouter as Router, Route, NavLink, Switch, Link } from "react-router-dom";
+import { HashRouter as Router, Route, NavLink, Switch, Link } from "react-router-dom";
+import  "./Home.less";
 export default class Home extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -16,7 +17,7 @@ export default class Home extends Component<any, any> {
   render() {
     return (
      <div id="home">
-         <h1>首页</h1>
+         <h1>俊平老色批首页</h1>
          <ul>
              <li><Link to="/login">登陆</Link></li>
              <li><Link to="/admin">管理员</Link></li>

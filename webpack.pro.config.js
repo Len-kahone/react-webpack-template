@@ -18,7 +18,7 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.(css|less)$/,
+        test: /\.less$/,
 
         use: [
           MiniCssExtractPlugin.loader,
@@ -41,7 +41,7 @@ module.exports = merge(baseConfig, {
     new OptimizeCSSAssetsPlugin({}), //对css进行压缩
     //将css从js中分离出来，以link的方式引用
     new MiniCssExtractPlugin({
-      filename: "css/[name].[contenthash:6].css",
+      filename: "css/[name].[contenthash].css",
     }),
     new BundleAnalyzerPlugin(),
     //告诉webpack哪些库不参与打包，同时使用时名称也得变
